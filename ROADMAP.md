@@ -1,6 +1,6 @@
 # Roadmap Athlos Training
 
-Estado al 8/10/2026. La landing está construida en `web/` y funciona en local con el WhatsApp y el Instagram reales.
+Estado al 8/10/2026. La landing está en `web/`, subida a `main` en GitHub (`ffran44/athlos`), con el WhatsApp y el Instagram reales. Usa Noto Serif en los títulos y GFS Neohellenic en el texto. Falta publicarla.
 Marcá cada ítem con `[x]` a medida que se resuelva.
 
 **Responsable:** 🧑‍🏫 Manu · 💻 vos (desarrollo)
@@ -18,14 +18,15 @@ Todo se carga en `web/src/content/site.ts`.
 - [ ] 🧑‍🏫 **Validar los planes**: nombres, qué incluye cada uno y si se muestran precios o se deja "Precio a consultar".
 - [ ] 🧑‍🏫 **Plan presencial**: definir en qué gimnasio o ciudad entrena, para mostrarlo en la página.
 - [ ] 🧑‍🏫 **Revisar las preguntas frecuentes** y sus respuestas (días por semana, plicómetro, etc.).
-- [ ] 🧑‍🏫 **Leer todos los textos de la página** y marcar lo que no suene a Manu. Están escritos en primera persona, como si hablara él.
+- [ ] 🧑‍🏫 **Leer todos los textos de la página** y marcar lo que no suene a Manu. Están escritos en primera persona, como si hablara él, y ya se les sacaron las frases que sonaban a IA.
 - [ ] 🧑‍🏫 **Demo de medidas**: los números son inventados porque la planilla estaba vacía. Decidir si quedan como ejemplo o se reemplazan por datos reales anonimizados.
 
 ## 2. Publicación
 
-- [ ] 💻 **Commit del proyecto `web/`**. Todavía no está commiteado.
-- [ ] 💻 **No subir los Excel a un repo público**: el de 6 días tiene datos de una alumna real. Sacarlos del repo o agregarlos al `.gitignore`.
-- [ ] 💻 **Subir a GitHub en un repo privado.**
+- [x] 💻 **Commit del proyecto `web/`**.
+- [x] 💻 **No subir los Excel al repo**: el de 6 días tiene datos de una alumna real. Quedan ignorados por el `.gitignore`.
+- [x] 💻 **Subir a GitHub** (`ffran44/athlos`, rama `main`).
+- [ ] 🧑‍🏫💻 **Decidir si el repo queda público o pasa a privado.** Hoy es público. Se cambia en GitHub → Settings → Danger Zone → Change visibility.
 - [ ] 💻 **Deploy en Vercel** (gratis), eligiendo la carpeta `web` como raíz del proyecto.
 - [ ] 🧑‍🏫💻 **Dominio propio**: ver disponibilidad (por ejemplo, `.com.ar` en NIC Argentina) y conectarlo en Vercel.
 - [ ] 💻 **Imagen para compartir** (Open Graph): cuando se pase el link por WhatsApp o Instagram, que aparezca el logo y el título.
