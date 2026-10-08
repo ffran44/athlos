@@ -1,0 +1,4 @@
+# Planillas de Excel: tienen datos de alumnos, no se suben al repo
+*.xlsx
+*.xls
+~$*
