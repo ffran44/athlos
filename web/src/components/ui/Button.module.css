@@ -8,7 +8,6 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 0.98rem;
-  font-stretch: 104%;
   white-space: nowrap;
   transition:
     transform 160ms var(--ease-out),

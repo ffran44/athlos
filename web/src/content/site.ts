@@ -71,10 +71,10 @@ export const planes: Plan[] = [
 // TODO: reemplazar por la bio real de Manu.
 export const bio = {
   nombre: "Manu",
-  titular: "Entrenar bien es medir, ajustar y volver a medir.",
+  titular: "Por qué armé Athlos.",
   parrafos: [
-    "Soy Manu, entrenador y creador de Athlos Training. Armé este sistema porque veía a mucha gente entrenar meses sin saber si estaba progresando.",
-    "Con Athlos cada alumno tiene su planificación, su registro semanal y sus medidas en un mismo lugar. Los números nos dicen cuándo subir la carga, cuándo sumar volumen y cuándo cambiar la estrategia.",
+    "Soy Manu, entrenador y creador de Athlos Training. Veía a mucha gente entrenar durante meses sin saber si estaba progresando, y quise que mis alumnos tuvieran esa respuesta en números.",
+    "Cada alumno tiene su planificación, su registro semanal y sus medidas en un mismo lugar. Con esos números decido cuándo subir la carga, cuándo sumar volumen y cuándo cambiar la estrategia.",
   ],
   // TODO: poner la foto en /public/manu.jpg (vertical, 4:5, mínimo 1200 px de alto)
   foto: null as string | null,
@@ -91,7 +91,7 @@ export type Testimonio = {
 export const testimonios: Testimonio[] = [
   {
     texto:
-      "Por primera vez sé exactamente cuánto levanté cada semana. Ver la curva del RM subir me hizo no faltar más.",
+      "Por primera vez sé cuánto levanté cada semana. Ver subir la curva del RM me hizo dejar de faltar.",
     nombre: "Nombre del alumno",
     detalle: "Plan Full, 6 meses",
     ejemplo: true,
@@ -103,7 +103,7 @@ export const testimonios: Testimonio[] = [
     ejemplo: true,
   },
   {
-    texto: "Bajé 6 cm de cintura sin perder fuerza. Las mediciones mensuales muestran lo que la balanza no.",
+    texto: "Bajé 6 cm de cintura sin perder fuerza. La balanza casi no se movía, pero las mediciones mensuales sí.",
     nombre: "Nombre del alumno",
     detalle: "Plan Presencial, 1 año",
     ejemplo: true,

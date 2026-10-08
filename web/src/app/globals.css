@@ -48,6 +48,9 @@ body {
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: 17px;
   line-height: 1.6;
+  /* GFS Neohellenic tiene minúsculas bajas y espacios anchos: se compensa acá */
+  font-size-adjust: 0.5;
+  word-spacing: -0.06em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   -webkit-tap-highlight-color: transparent;
@@ -112,6 +115,7 @@ button {
 }
 
 .mono {
+  word-spacing: normal;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
 }

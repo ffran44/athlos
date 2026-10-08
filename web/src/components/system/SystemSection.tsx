@@ -13,9 +13,9 @@ const tabs = [
   {
     id: "progresion",
     tab: "Progresión",
-    titulo: "Cada serie cuenta.",
+    titulo: "Tus cargas, semana a semana.",
     texto:
-      "Registrás kilos y repeticiones. La planilla calcula tu RM estimado, el volumen de cada músculo y te avisa cuándo subir la carga.",
+      "Anotás kilos y repeticiones de cada ejercicio. La planilla calcula tu RM estimado y el volumen de cada músculo, y te avisa cuándo subir la carga.",
     items: [
       "RM estimado con la fórmula de Epley",
       "Volumen semanal: series × kg × reps",
@@ -28,9 +28,9 @@ const tabs = [
   {
     id: "medidas",
     tab: "Medidas",
-    titulo: "Lo que la balanza no cuenta.",
+    titulo: "Peso, perímetros y pliegues.",
     texto:
-      "Peso diario con promedio de 7 días, y cada mes circunferencias, pliegues y fotos. Ves la tendencia real y no el ruido del día.",
+      "Te pesás todos los días y la planilla saca el promedio de 7 días, que muestra la tendencia sin los altibajos diarios. Una vez por mes sumamos circunferencias, pliegues y fotos.",
     items: [
       "Peso diario y promedio móvil",
       "Balance calórico y estrategia del mes",
@@ -43,9 +43,9 @@ const tabs = [
   {
     id: "habitos",
     tab: "Hábitos",
-    titulo: "La disciplina también se entrena.",
+    titulo: "Hábitos con puntaje.",
     texto:
-      "Cada hábito suma puntos y el día se puntúa sobre 100. Las rachas se protegen, la experiencia sube de nivel y los días difíciles dan bonus.",
+      "Cada hábito cumplido suma puntos y el día se califica sobre 100. Los días cumplidos seguidos arman una racha, y si el día fue difícil y lo sacaste igual, ganás puntos extra.",
     items: [
       "Puntuación diaria con semáforo",
       "Rachas con protecciones",
@@ -77,8 +77,8 @@ export function SystemSection() {
         <Reveal>
           <h2 className="sectionTitle">Tres planillas, un mismo sistema.</h2>
           <p className="lede">
-            Esto es lo que vas a usar. Cambiá de ejercicio, pasá el cursor por los gráficos, marcá hábitos: son las mismas
-            cuentas que hacen las planillas de Athlos, con datos de ejemplo.
+            Así se ven las planillas que vas a usar, con datos de ejemplo. Hacen las mismas cuentas: probá cambiar de
+            ejercicio o marcar hábitos.
           </p>
         </Reveal>
 

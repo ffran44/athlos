@@ -45,7 +45,7 @@ export function HeroLedger() {
               Semana
             </span>
             {semanas.map((s, i) => (
-              <span role="columnheader" key={s} className={i === actual ? styles.now : undefined} style={{ "--c": i } as React.CSSProperties}>
+              <span role="columnheader" key={s} className={`mono ${i === actual ? styles.now : ""}`} style={{ "--c": i } as React.CSSProperties}>
                 {s}
               </span>
             ))}

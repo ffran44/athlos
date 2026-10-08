@@ -16,21 +16,21 @@ type Carril = {
 const carriles: Carril[] = [
   {
     titulo: "Evaluación",
-    detalle: "Charlamos tu objetivo, tu historia y tu disponibilidad. Tomamos medidas y fotos de partida.",
+    detalle: "Hablamos de tu objetivo y de cuántos días podés entrenar. Tomamos medidas y fotos para tener un punto de partida.",
     tipo: "bloque",
     desde: 0,
     hasta: 0,
   },
   {
     titulo: "Entrenamiento",
-    detalle: "Un bloque de 8 semanas, de 3 a 6 días, con series y rango de repeticiones para cada ejercicio.",
+    detalle: "Ocho semanas, de 3 a 6 días por semana. Cada ejercicio tiene sus series y su rango de repeticiones.",
     tipo: "bloque",
     desde: 1,
     hasta: 8,
   },
   {
     titulo: "Registro",
-    detalle: "Cada semana anotás kilos y repeticiones. El sistema calcula tu RM estimado y tu volumen.",
+    detalle: "Cada semana anotás kilos y repeticiones, y la planilla calcula tu RM estimado y tu volumen.",
     tipo: "puntos",
     puntos: [1, 2, 3, 4, 5, 6, 7, 8],
   },
@@ -42,13 +42,13 @@ const carriles: Carril[] = [
   },
   {
     titulo: "Medidas",
-    detalle: "Circunferencias, pliegues y fotos cada 4 semanas, con peso diario en el medio.",
+    detalle: "Circunferencias, pliegues y fotos cada 4 semanas. Entre una medición y otra, te pesás todos los días.",
     tipo: "puntos",
     puntos: [0, 4, 8],
   },
   {
     titulo: "Hábitos",
-    detalle: "Sueño, pasos, agua y lo que elijamos, con una puntuación diaria y rachas.",
+    detalle: "Sueño, pasos, agua o lo que elijamos juntos. Cada día recibe un puntaje y los días cumplidos arman rachas.",
     tipo: "linea",
     desde: 1,
     hasta: 8,
@@ -62,8 +62,8 @@ export function Method() {
         <Reveal>
           <h2 className="sectionTitle">Así trabajamos un bloque.</h2>
           <p className="lede">
-            Ocho semanas con un plan claro. Vos entrenás y registrás; yo leo los números y ajusto. En la semana 8 revisamos
-            todo y armamos el bloque siguiente.
+            Un bloque dura ocho semanas. Vos entrenás y anotás lo que hiciste, yo leo los números y ajusto. En la semana 8
+            repasamos todo y armamos el bloque siguiente.
           </p>
         </Reveal>
 
