@@ -1,0 +1,135 @@
+.fig {
+  margin: 0;
+  transform: rotate(0.6deg);
+}
+
+.card {
+  padding: clamp(18px, 2.4vw, 28px);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.kicker {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.name {
+  margin-top: 2px;
+  font-size: 1.55rem;
+  letter-spacing: -0.01em;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 6px 10px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #eef1f5;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ledger {
+  margin-top: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 74px repeat(8, minmax(40px, 1fr));
+  align-items: center;
+  font-size: 0.78rem;
+  min-width: 420px;
+}
+
+.row > span {
+  padding: 5px 2px;
+  text-align: center;
+  animation: cell 520ms var(--ease-out) both;
+  animation-delay: calc(500ms + var(--c, 0) * 90ms);
+}
+
+.row:first-child > span {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.rh {
+  text-align: left !important;
+  color: var(--muted);
+  font-weight: 500;
+  animation: none !important;
+}
+
+.rm {
+  font-weight: 500;
+}
+
+.now {
+  background: var(--surface-sunken);
+  color: var(--ink) !important;
+}
+
+.row:first-child .now {
+  border-radius: 6px 6px 0 0;
+}
+
+.row:last-child .now {
+  border-radius: 0 0 6px 6px;
+}
+
+.empty {
+  color: var(--silver) !important;
+}
+
+@keyframes cell {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.formula {
+  font-family: var(--font-display), serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.delta {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--good);
+}
+
+@media (max-width: 900px) {
+  .fig {
+    transform: none;
+  }
+}

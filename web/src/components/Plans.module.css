@@ -1,0 +1,210 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+  margin-top: clamp(36px, 5vw, 60px);
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(22px, 3vw, 32px);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow:
+    inset 0 0 0 1px rgb(11 21 38 / 0.07),
+    0 18px 40px -30px rgb(11 21 38 / 0.35);
+}
+
+.featured {
+  grid-row: span 2;
+  background: var(--ink);
+  color: #eef1f5;
+  box-shadow: 0 30px 60px -36px rgb(11 21 38 / 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+/* El casco del logo, grabado en la placa del plan completo */
+.featured::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  bottom: -30px;
+  width: 280px;
+  height: 390px;
+  background: url("/brand/athlos-mark.png") no-repeat center / contain;
+  opacity: 0.07;
+  filter: invert(1);
+  pointer-events: none;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 14px;
+}
+
+.mode {
+  width: 100%;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.featured .mode {
+  color: #aab3c0;
+}
+
+.name {
+  margin-top: 4px;
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.7rem, 2.6vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.tag {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16);
+}
+
+.summary {
+  margin-top: 12px;
+  max-width: 46ch;
+  color: var(--ink-2);
+}
+
+.featured .summary {
+  color: #c8cfd9;
+  font-size: 1.05rem;
+}
+
+.list {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  font-size: 0.93rem;
+}
+
+.list li {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.list svg {
+  margin-top: 4px;
+}
+
+.systems {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: auto 0 0;
+  padding: 0;
+  padding-top: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.systems li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 16px 18px;
+  background: rgb(255 255 255 / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+}
+
+.systems li:first-child {
+  border-radius: var(--r-md) 0 0 var(--r-md);
+}
+
+.systems li:last-child {
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+
+.systems svg {
+  margin-bottom: 10px;
+  color: #cfd6df;
+}
+
+.sysName {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.sysDetail {
+  font-size: 0.8rem;
+  color: #aab3c0;
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: auto;
+  padding-top: 26px;
+  position: relative;
+  z-index: 1;
+}
+
+.price {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.featured .price {
+  color: #aab3c0;
+}
+
+/* Botón claro sobre la placa oscura */
+.invert {
+  background: #eef1f5 !important;
+  color: var(--ink) !important;
+}
+
+.invert > span:last-child {
+  background: rgb(11 21 38 / 0.08) !important;
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .featured {
+    grid-row: auto;
+  }
+  .systems {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .systems li,
+  .systems li:first-child,
+  .systems li:last-child {
+    border-radius: 0;
+  }
+  .systems li:first-child {
+    border-radius: var(--r-md) var(--r-md) 0 0;
+  }
+  .systems li:last-child {
+    border-radius: 0 0 var(--r-md) var(--r-md);
+  }
+}
+
+/* En la tarjeta destacada el espacio libre lo toma la franja de sistemas */
+.systems + .foot {
+  margin-top: 0;
+}

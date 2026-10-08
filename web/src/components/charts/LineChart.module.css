@@ -1,0 +1,109 @@
+.root {
+  position: relative;
+  width: 100%;
+  touch-action: pan-y;
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+}
+
+.grid {
+  stroke: var(--line);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+
+.tick {
+  fill: var(--muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+}
+
+.crosshair {
+  stroke: var(--silver);
+  stroke-width: 1;
+}
+
+.lineInk,
+.lineSilver {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lineInk {
+  stroke: var(--ink);
+}
+
+.lineSilver {
+  stroke: var(--silver);
+}
+
+.marker {
+  fill: var(--ink);
+  stroke: var(--surface);
+  stroke-width: 2;
+  transition: r 160ms var(--ease-out);
+}
+
+.dotSilver {
+  fill: #7f8a9a; /* 3,3:1 sobre la superficie: legible como marca gráfica */
+  stroke: var(--surface);
+  stroke-width: 1.5;
+}
+
+.dotInk {
+  fill: var(--ink);
+}
+
+.endLabel {
+  fill: var(--ink);
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.tooltip {
+  position: absolute;
+  transform: translateX(-50%);
+  min-width: 140px;
+  padding: 8px 10px;
+  border-radius: var(--r-sm);
+  background: var(--ink);
+  color: #eef1f5;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  pointer-events: none;
+  box-shadow: 0 12px 24px -12px rgb(11 21 38 / 0.6);
+  z-index: 2;
+}
+
+.ttTitle {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.ttRow {
+  display: grid;
+  grid-template-columns: 10px 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.keyInk,
+.keySilver {
+  width: 10px;
+  height: 2px;
+  border-radius: 2px;
+}
+
+.keyInk {
+  background: #eef1f5;
+}
+
+.keySilver {
+  background: var(--silver);
+}

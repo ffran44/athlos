@@ -1,0 +1,59 @@
+# Roadmap Athlos Training
+
+Estado al 8/10/2026. La landing está construida en `web/` y funciona en local con el WhatsApp y el Instagram reales.
+Marcá cada ítem con `[x]` a medida que se resuelva.
+
+**Responsable:** 🧑‍🏫 Manu · 💻 vos (desarrollo)
+
+---
+
+## 1. Contenido que falta (bloquea el lanzamiento)
+
+Todo se carga en `web/src/content/site.ts`.
+
+- [ ] 🧑‍🏫 **Bio de Manu**: titular y 2 párrafos cortos. Sumar formación o certificaciones si las tiene (hoy no se menciona ninguna).
+- [ ] 🧑‍🏫 **Foto de Manu**: vertical 4:5, mínimo 1200 px de alto. Va en `web/public/manu.jpg` y después se pone `foto: "/manu.jpg"` en `bio`.
+- [ ] 🧑‍🏫 **Testimonios reales**: al menos 3, de hasta 3 líneas, con nombre, plan y tiempo entrenando. **Pedir permiso a cada alumno** para publicarlo.
+- [ ] 💻 Cargar los testimonios y borrar `ejemplo: true` para que desaparezca la etiqueta "Texto de ejemplo".
+- [ ] 🧑‍🏫 **Validar los planes**: nombres, qué incluye cada uno y si se muestran precios o se deja "Precio a consultar".
+- [ ] 🧑‍🏫 **Plan presencial**: definir en qué gimnasio o ciudad entrena, para mostrarlo en la página.
+- [ ] 🧑‍🏫 **Revisar las preguntas frecuentes** y sus respuestas (días por semana, plicómetro, etc.).
+- [ ] 🧑‍🏫 **Leer todos los textos de la página** y marcar lo que no suene a Manu. Están escritos en primera persona, como si hablara él.
+- [ ] 🧑‍🏫 **Demo de medidas**: los números son inventados porque la planilla estaba vacía. Decidir si quedan como ejemplo o se reemplazan por datos reales anonimizados.
+
+## 2. Publicación
+
+- [ ] 💻 **Commit del proyecto `web/`**. Todavía no está commiteado.
+- [ ] 💻 **No subir los Excel a un repo público**: el de 6 días tiene datos de una alumna real. Sacarlos del repo o agregarlos al `.gitignore`.
+- [ ] 💻 **Subir a GitHub en un repo privado.**
+- [ ] 💻 **Deploy en Vercel** (gratis), eligiendo la carpeta `web` como raíz del proyecto.
+- [ ] 🧑‍🏫💻 **Dominio propio**: ver disponibilidad (por ejemplo, `.com.ar` en NIC Argentina) y conectarlo en Vercel.
+- [ ] 💻 **Imagen para compartir** (Open Graph): cuando se pase el link por WhatsApp o Instagram, que aparezca el logo y el título.
+- [ ] 💻 **`sitemap.xml` y `robots.txt`** para Google.
+- [ ] 💻 **Datos estructurados** (LocalBusiness / Person) para que Google entienda quién es Manu y dónde entrena.
+- [ ] 💻 **Analytics** (Vercel Analytics o GA4) con eventos en los clics de WhatsApp e Instagram, para saber cuántas consultas trae la página.
+- [ ] 💻 **Probar en celulares reales** (iPhone con Safari, Android con Chrome): que WhatsApp abra la app con el mensaje ya escrito.
+- [ ] 💻 **Correr Lighthouse** (rendimiento, accesibilidad y SEO) sobre la versión publicada.
+- [ ] 🧑‍🏫 **Poner el link en la bio de Instagram** (`athlos_training.mc`).
+- [ ] 🧑‍🏫 **Google Business Profile**, si el presencial tiene un lugar fijo.
+
+## 3. Arreglos en las planillas (encontrados al analizarlas)
+
+- [ ] 🧑‍🏫💻 **`SISTEMA_DE_MEDIDAS_CORPORALES-1.xlsx`**: el Dashboard muestra `#REF!` en todas las circunferencias y pliegues. Hay referencias rotas a la hoja de Mediciones.
+- [ ] 🧑‍🏫 **`Sistema_Athlos_6dias.xlsx`**: los MÍN y MÁX de series por músculo están vacíos, así que el semáforo de músculos no funciona hasta completarlos.
+- [ ] 🧑‍🏫 **`Sistema_Athlos_6dias.xlsx`**: los días 4, 5 y 6 no tienen nombre de sesión y hay un "Ejercicio de prueba" cargado.
+- [ ] 🧑‍🏫 **Planilla de hábitos** ("Prueba, no utilizar con alumnos"): terminar las pruebas y generar la versión final para alumnos.
+- [ ] 🧑‍🏫 **Plantillas limpias**: armar una copia vacía de cada planilla para cada alumno nuevo. La Guía dice "hacé una copia del archivo".
+
+## 4. Mejoras después del lanzamiento
+
+- [ ] **Resultados / antes y después**, con fotos y autorización de los alumnos.
+- [ ] **Formulario corto de evaluación** (objetivo, días disponibles, experiencia) que arme solo el mensaje de WhatsApp.
+- [ ] **Precios**, si Manu decide mostrarlos.
+- [ ] **Videos de técnica** o publicaciones de Instagram dentro de la página.
+- [ ] **Guía de medición pública**: ya existe en la planilla y en Canva, puede servir como contenido para atraer gente.
+- [ ] **Recurso descargable gratis** (por ejemplo, un bloque de muestra) a cambio del contacto.
+
+## 5. A largo plazo
+
+- [ ] **App web para alumnos**: login, carga semanal desde el celular y los mismos gráficos de la landing, reemplazando los Excel. La lógica ya está en `web/src/content/demo.ts` (RM de Epley, señal de subir carga, semáforo, puntuación de hábitos).

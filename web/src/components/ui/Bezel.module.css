@@ -1,0 +1,16 @@
+/* Doble bisel: bandeja exterior + placa interior con radios concéntricos. */
+.shell {
+  padding: 7px;
+  border-radius: var(--r-lg);
+  background: rgb(11 21 38 / 0.045);
+  box-shadow: inset 0 0 0 1px rgb(11 21 38 / 0.06);
+}
+
+.core {
+  border-radius: calc(var(--r-lg) - 7px);
+  background: var(--surface);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    0 1px 2px rgb(11 21 38 / 0.04),
+    0 24px 48px -28px rgb(11 21 38 / 0.28);
+}
