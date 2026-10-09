@@ -1,6 +1,6 @@
 # Roadmap Athlos Training
 
-Estado al 9/10/2026. La landing está **publicada en https://athlos-training.vercel.app** (Vercel publica solo cada push a `main` de `ffran44/athlos`). Tiene el WhatsApp y el Instagram reales, Noto Serif en los títulos y GFS Neohellenic en el texto, la ficha del hero animada con anime.js y los testimonios en un carrusel con Swiper. Lo que falta para lanzarla es el contenido de Manu (sección 1).
+Estado al 9/10/2026. La landing está **publicada en https://athlos-training.vercel.app** (Vercel publica solo cada push a `main` de `ffran44/athlos`). Tiene el WhatsApp y el Instagram reales, Noto Serif en los títulos y GFS Neohellenic en el texto, la ficha del hero animada con anime.js (se puede cambiar entre 4 ejercicios y gira como una tarjeta), los planes en un acordeón que se expande al elegirlos y los testimonios en un carrusel con Swiper. Lo que falta para lanzarla es el contenido de Manu (sección 1).
 Marcá cada ítem con `[x]` a medida que se resuelva.
 
 **Responsable:** 🧑‍🏫 Manu · 💻 vos (desarrollo)
@@ -15,7 +15,7 @@ Todo se carga en `web/src/content/site.ts`.
 - [ ] 🧑‍🏫 **Foto de Manu**: vertical 4:5, mínimo 1200 px de alto. Va en `web/public/manu.jpg` y después se pone `foto: "/manu.jpg"` en `bio`.
 - [ ] 🧑‍🏫 **Testimonios reales**: al menos 3, de hasta 3 líneas, con nombre, plan y tiempo entrenando. **Pedir permiso a cada alumno** para publicarlo.
 - [ ] 💻 Cargar los testimonios y borrar `ejemplo: true` para que desaparezca la etiqueta "Texto de ejemplo".
-- [ ] 🧑‍🏫 **Validar los planes**: nombres, qué incluye cada uno y si se muestran precios o se deja "Precio a consultar".
+- [ ] 🧑‍🏫 **Validar los planes**: nombres, qué incluye cada uno y si se muestran precios o se deja "Precio a consultar". En la página se ven como un acordeón: el plan Full arranca abierto y cada uno se expande al tocarlo.
 - [ ] 🧑‍🏫 **Plan presencial**: definir en qué gimnasio o ciudad entrena, para mostrarlo en la página.
 - [ ] 🧑‍🏫 **Revisar las preguntas frecuentes** y sus respuestas (días por semana, plicómetro, etc.).
 - [ ] 🧑‍🏫 **Leer todos los textos de la página** y marcar lo que no suene a Manu. Están escritos en primera persona, como si hablara él, y ya se les sacaron las frases que sonaban a IA.
