@@ -197,7 +197,7 @@ export function LineChart({
               )}
           </g>
 
-          {endLabel && lastIdx >= 0 && primary.values[lastIdx] != null && hover == null && (
+          {endLabel && lastIdx >= 0 && primary.values[lastIdx] != null && !hoverHasData && (
             <text
               x={geo.x(lastIdx)}
               y={geo.y(primary.values[lastIdx] as number) - 14}
