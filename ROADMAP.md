@@ -1,6 +1,6 @@
 # Roadmap Athlos Training
 
-Estado al 9/10/2026. La landing está **publicada en https://athlos-training.vercel.app** (Vercel publica solo cada push a `main` de `ffran44/athlos`). Tiene el WhatsApp y el Instagram reales, Noto Serif en los títulos y GFS Neohellenic en el texto. Lo que falta para lanzarla es el contenido de Manu (sección 1).
+Estado al 9/10/2026. La landing está **publicada en https://athlos-training.vercel.app** (Vercel publica solo cada push a `main` de `ffran44/athlos`). Tiene el WhatsApp y el Instagram reales, Noto Serif en los títulos y GFS Neohellenic en el texto, la ficha del hero animada con anime.js y los testimonios en un carrusel con Swiper. Lo que falta para lanzarla es el contenido de Manu (sección 1).
 Marcá cada ítem con `[x]` a medida que se resuelva.
 
 **Responsable:** 🧑‍🏫 Manu · 💻 vos (desarrollo)
@@ -36,7 +36,7 @@ Todo se carga en `web/src/content/site.ts`.
 - [ ] 💻 **Analytics** (Vercel Analytics o GA4) con eventos en los clics de WhatsApp e Instagram, para saber cuántas consultas trae la página.
 - [ ] 💻 **Probar en celulares reales** (iPhone con Safari, Android con Chrome): que WhatsApp abra la app con el mensaje ya escrito.
 - [x] 💻 **Correr Lighthouse sobre la versión publicada** (9/10/2026). Rendimiento / accesibilidad / buenas prácticas / SEO: escritorio 100 / 100 / 100 / 100 y celular 88 / 100 / 100 / 100 (LCP 3,1 s, sin saltos de layout).
-- [ ] 💻 **Subir el rendimiento en celular a 90 o más**: el LCP de 3,1 s viene sobre todo del JavaScript de las animaciones (librería Motion). Opción: pasar las entradas al scroll a CSS puro.
+- [x] 💻 **Subir el rendimiento en celular a 90 o más.** Se reemplazó Motion por animaciones CSS y anime.js, y Swiper se carga recién al llegar a los testimonios. En el sitio publicado, celular dio 93 / 94 / 96 en tres corridas (LCP 2,6 a 2,9 s), con accesibilidad, buenas prácticas y SEO en 100.
 - [ ] 🧑‍🏫 **Poner el link en la bio de Instagram** (`athlos_training.mc`): https://athlos-training.vercel.app. Conviene esperar a tener la bio, la foto y los testimonios reales.
 - [ ] 🧑‍🏫 **Google Business Profile**, si el presencial tiene un lugar fijo.
 
