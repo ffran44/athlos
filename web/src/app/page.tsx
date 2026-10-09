@@ -7,7 +7,7 @@ import { Nav } from "@/components/Nav";
 import { Plans } from "@/components/Plans";
 import { StructuredData } from "@/components/StructuredData";
 import { SystemSection } from "@/components/system/SystemSection";
-import { Testimonials } from "@/components/Testimonials";
+import { Testimonials } from "@/components/testimonials/Testimonials";
 
 export default function Home() {
   return (

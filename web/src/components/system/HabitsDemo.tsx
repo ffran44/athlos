@@ -3,6 +3,7 @@
 import { Check, Fire, Snowflake } from "@phosphor-icons/react";
 import { useState } from "react";
 import { estadoHabitos, habitos, umbrales } from "@/content/demo";
+import { CountUp } from "../ui/CountUp";
 import { StatusTag, type Estado } from "./StatusTag";
 import styles from "./Demos.module.css";
 
@@ -11,6 +12,10 @@ const dificultades = [
   { id: "dificil", label: "Difícil", bonus: 5 },
   { id: "muy", label: "Muy difícil", bonus: 10 },
 ] as const;
+
+const entero = (v: number) => String(Math.round(v));
+const enDias = (v: number) => `${Math.round(v)} días`;
+const masXp = (v: number) => `+${Math.round(v)}`;
 
 function estadoDe(score: number, obligatoriosOk: boolean): { estado: Estado; texto: string } {
   if (!obligatoriosOk) return { estado: "mal", texto: "Falta un obligatorio" };
@@ -85,7 +90,7 @@ export function HabitsDemo() {
 
         <div className={styles.scoreCol}>
           <div className={styles.score} aria-live="polite">
-            <span className={`mono ${styles.scoreNum}`}>{score}</span>
+            <CountUp value={score} format={entero} className={`mono ${styles.scoreNum}`} />
             <span className={styles.scoreOf}>/100</span>
           </div>
           <StatusTag estado={estado}>{texto}</StatusTag>
@@ -95,7 +100,9 @@ export function HabitsDemo() {
               <dt>
                 <Fire size={16} weight="fill" aria-hidden /> Racha
               </dt>
-              <dd className="mono">{racha} días</dd>
+              <dd className="mono">
+                <CountUp value={racha} format={enDias} />
+              </dd>
             </div>
             <div>
               <dt>
@@ -106,7 +113,7 @@ export function HabitsDemo() {
             <div>
               <dt>XP de hoy</dt>
               <dd className="mono">
-                +{xpHoy}
+                <CountUp value={xpHoy} format={masXp} />
                 {bonus > 0 && <span className={styles.bonus}> (+{bonus} resiliencia)</span>}
               </dd>
             </div>
@@ -116,7 +123,7 @@ export function HabitsDemo() {
             <div className={styles.levelHead}>
               <span>Nivel {estadoHabitos.nivel}</span>
               <span className="mono">
-                {xp} / {estadoHabitos.xpSiguiente} XP
+                <CountUp value={xp} format={entero} /> / {estadoHabitos.xpSiguiente} XP
               </span>
             </div>
             <div className={styles.segments} aria-hidden="true">

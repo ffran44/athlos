@@ -1,0 +1,199 @@
+.section {
+  /* Las tarjetas se asoman por el borde derecho sin generar scroll horizontal */
+  overflow-x: clip;
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.nav {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--silver);
+  cursor: pointer;
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 200ms ease,
+    color 200ms ease,
+    opacity 200ms ease;
+}
+
+.arrow:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .arrow:hover:not(:disabled) {
+    background: var(--ink);
+    color: #f3f5f8;
+  }
+}
+
+.swiper {
+  margin-top: clamp(32px, 5vw, 52px);
+  overflow: visible !important;
+}
+
+.slide {
+  width: min(440px, 84vw) !important;
+  height: auto !important;
+  transition:
+    opacity 500ms var(--ease-out),
+    transform 500ms var(--ease-out);
+}
+
+/* Fila estática que se muestra hasta que carga Swiper, con el mismo layout */
+.static {
+  display: flex;
+  gap: 16px;
+}
+
+.static .slide {
+  flex-shrink: 0;
+}
+
+/* Las tarjetas que no entran completas quedan atenuadas: invitan a deslizar */
+.swiper:global(.swiper-initialized) .slide:not(:global(.swiper-slide-fully-visible)) {
+  opacity: 0.45;
+  transform: scale(0.97);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  height: 100%;
+  margin: 0;
+  padding: 34px 32px 30px;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow:
+    inset 0 0 0 1px rgb(11 21 38 / 0.07),
+    0 24px 48px -36px rgb(11 21 38 / 0.35);
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.mark {
+  position: absolute;
+  top: -18px;
+  left: 18px;
+  font-family: var(--font-display), serif;
+  font-size: 8.5rem;
+  line-height: 1;
+  color: rgb(11 21 38 / 0.07);
+  pointer-events: none;
+}
+
+.example {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  color: var(--warn);
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+
+.quote {
+  position: relative;
+  margin: 28px 0 0;
+  font-family: var(--font-display), serif;
+  font-size: 1.22rem;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  word-spacing: normal;
+  text-wrap: pretty;
+}
+
+.who {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+.who > span:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #eef1f5;
+  font-family: var(--font-display), serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.name {
+  font-weight: 700;
+}
+
+.detail {
+  color: var(--muted);
+}
+
+/* Barra de progreso: una pastilla que recorre la pista según la posición */
+.track {
+  position: relative;
+  height: 2px;
+  margin-top: 28px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.thumb {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 30%;
+  border-radius: 2px;
+  background: var(--ink);
+  transform: translateX(calc(var(--p, 0) * 233.333%));
+  transition: transform 300ms var(--ease-out);
+}
+
+@media (max-width: 560px) {
+  .arrow {
+    width: 42px;
+    height: 42px;
+  }
+  .card {
+    padding: 28px 24px 24px;
+  }
+}

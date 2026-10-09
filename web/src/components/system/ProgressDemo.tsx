@@ -4,10 +4,13 @@ import { ArrowFatLineUp, Equals } from "@phosphor-icons/react";
 import { useState } from "react";
 import { ejercicios, musculos, rmEstimado, senal } from "@/content/demo";
 import { LineChart } from "../charts/LineChart";
+import { CountUp } from "../ui/CountUp";
 import { StatusTag } from "./StatusTag";
 import styles from "./Demos.module.css";
 
 const fmt = (v: number) => v.toFixed(1).replace(".", ",");
+const fmtKg = (v: number) => `${fmt(v)} kg`;
+const fmtPct = (v: number) => `+${fmt(v)}%`;
 const ESCALA = 20; // series por semana, eje del semáforo
 
 export function ProgressDemo() {
@@ -39,11 +42,11 @@ export function ProgressDemo() {
       <div className={styles.stats}>
         <div>
           <span className={styles.statLabel}>Mejor RM</span>
-          <span className={`mono ${styles.statValue}`}>{fmt(mejor)} kg</span>
+          <CountUp value={mejor} format={fmtKg} className={`mono ${styles.statValue}`} />
         </div>
         <div>
           <span className={styles.statLabel}>Última semana</span>
-          <span className={`mono ${styles.statValue}`}>+{fmt(delta)}%</span>
+          <CountUp value={delta} format={fmtPct} className={`mono ${styles.statValue}`} />
         </div>
         <div>
           <span className={styles.statLabel}>Señal</span>

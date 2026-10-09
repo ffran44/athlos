@@ -58,8 +58,6 @@
 .row > span {
   padding: 5px 2px;
   text-align: center;
-  animation: cell 520ms var(--ease-out) both;
-  animation-delay: calc(500ms + var(--c, 0) * 90ms);
 }
 
 .row:first-child > span {
@@ -71,7 +69,6 @@
   text-align: left !important;
   color: var(--muted);
   font-weight: 500;
-  animation: none !important;
 }
 
 .rm {
@@ -95,10 +92,25 @@
   color: var(--silver) !important;
 }
 
-@keyframes cell {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
+/*
+ * Entrada coreografiada con anime.js (ver HeroLedger.tsx).
+ * pending: todavía no corrió el JS. Las piezas esperan ocultas y, si el JS
+ *          nunca llega, se muestran solas a los 2,4 s.
+ * js:      anime.js las va mostrando con estilos inline.
+ * done:    todo visible.
+ */
+.fig[data-anim="pending"] [data-reveal] {
+  opacity: 0;
+  animation: reveal-fallback 500ms var(--ease-out) 2.4s forwards;
+}
+
+.fig[data-anim="js"] [data-reveal] {
+  opacity: 0;
+}
+
+@keyframes reveal-fallback {
+  to {
+    opacity: 1;
   }
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import styles from "./LineChart.module.css";
 
 export type Serie = {
@@ -26,6 +26,10 @@ type Props = {
   markers?: "all" | "last";
   /** Mostrar una etiqueta del eje X cada N puntos (el tooltip siempre muestra todas) */
   labelEvery?: number;
+  /** "css": la línea se dibuja sola. "none": la anima otro componente (ver onMount). */
+  draw?: "css" | "none";
+  /** Se llama una vez, antes del primer pintado del SVG, para coreografiar la entrada */
+  onMount?: (svg: SVGSVGElement) => void;
 };
 
 const PAD = { top: 18, right: 18, bottom: 28, left: 44 };
@@ -52,8 +56,12 @@ export function LineChart({
   drawKey,
   markers = "all",
   labelEvery = 1,
+  draw = "css",
+  onMount,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const mounted = useRef(false);
   const [width, setWidth] = useState(0);
   const [hover, setHover] = useState<number | null>(null);
   const clipId = useId();
@@ -65,6 +73,13 @@ export function LineChart({
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
+
+  useLayoutEffect(() => {
+    if (width > 0 && svgRef.current && !mounted.current) {
+      mounted.current = true;
+      onMount?.(svgRef.current);
+    }
+  }, [width, onMount]);
 
   const geo = useMemo(() => {
     const all = series.flatMap((s) => s.values.filter((v): v is number => v != null));
@@ -110,7 +125,7 @@ export function LineChart({
   return (
     <div ref={ref} className={styles.root} style={{ height }}>
       {width > 0 && (
-        <svg width={width} height={height} role="img" aria-label={ariaLabel} className={styles.svg}>
+        <svg ref={svgRef} width={width} height={height} role="img" aria-label={ariaLabel} className={styles.svg}>
           <defs>
             <clipPath id={clipId}>
               <rect x={0} y={0} width={width} height={height} />
@@ -161,7 +176,8 @@ export function LineChart({
                   key={`${s.id}-${drawKey ?? ""}`}
                   d={pathFor(s.values)}
                   pathLength={1}
-                  className={`${s.tone === "silver" ? styles.lineSilver : styles.lineInk} ${styles.draw}`}
+                  data-line={s.id}
+                  className={`${s.tone === "silver" ? styles.lineSilver : styles.lineInk} ${draw === "css" ? styles.draw : ""}`}
                 />
               ),
             )}
@@ -174,6 +190,7 @@ export function LineChart({
                     cx={geo.x(i)}
                     cy={geo.y(v)}
                     r={hover === i || i === lastIdx ? 5 : 3.5}
+                    data-marker={i}
                     className={styles.marker}
                   />
                 ),
@@ -185,6 +202,7 @@ export function LineChart({
               x={geo.x(lastIdx)}
               y={geo.y(primary.values[lastIdx] as number) - 14}
               textAnchor="middle"
+              data-endlabel=""
               className={styles.endLabel}
             >
               {format(primary.values[lastIdx] as number)}
