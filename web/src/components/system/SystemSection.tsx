@@ -1,7 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Reveal } from "../ui/Reveal";
 import bezel from "../ui/Bezel.module.css";
 import { HabitsDemo } from "./HabitsDemo";
@@ -59,9 +58,24 @@ const tabs = [
 
 export function SystemSection() {
   const [active, setActive] = useState(0);
-  const reduce = useReducedMotion();
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const listRef = useRef<HTMLDivElement>(null);
+  // Posición de la píldora que marca la pestaña activa (se mueve con una transición CSS)
+  const [pill, setPill] = useState<{ x: number; w: number } | null>(null);
   const t = tabs[active];
+
+  useLayoutEffect(() => {
+    const list = listRef.current;
+    const update = () => {
+      const el = tabRefs.current[active];
+      if (el) setPill({ x: el.offsetLeft, w: el.offsetWidth });
+    };
+    update();
+    if (!list) return;
+    const ro = new ResizeObserver(update);
+    ro.observe(list);
+    return () => ro.disconnect();
+  }, [active]);
 
   function onKey(e: React.KeyboardEvent) {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
@@ -82,7 +96,19 @@ export function SystemSection() {
           </p>
         </Reveal>
 
-        <div className={styles.tabs} role="tablist" aria-label="Partes del sistema" onKeyDown={onKey}>
+        <div
+          ref={listRef}
+          className={styles.tabs}
+          role="tablist"
+          aria-label="Partes del sistema"
+          onKeyDown={onKey}
+          data-ready={pill != null}
+        >
+          <span
+            className={styles.pill}
+            aria-hidden="true"
+            style={pill ? { transform: `translateX(${pill.x}px)`, width: pill.w } : undefined}
+          />
           {tabs.map((x, i) => (
             <button
               key={x.id}
@@ -98,30 +124,13 @@ export function SystemSection() {
               className={styles.tab}
               onClick={() => setActive(i)}
             >
-              {i === active && (
-                <motion.span
-                  layoutId="tab-pill"
-                  className={styles.pill}
-                  transition={reduce ? { duration: 0 } : { type: "spring", duration: 0.45, bounce: 0.15 }}
-                />
-              )}
               <span className={styles.tabLabel}>{x.tab}</span>
             </button>
           ))}
         </div>
 
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={t.id}
-            id={`panel-${t.id}`}
-            role="tabpanel"
-            aria-labelledby={`tab-${t.id}`}
-            className={styles.panel}
-            initial={{ opacity: 0, filter: "blur(2px)", transform: reduce ? "none" : "translateY(8px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)", transform: "translateY(0px)" }}
-            exit={{ opacity: 0, filter: "blur(2px)", transition: { duration: 0.14 } }}
-            transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
-          >
+        {/* La key remonta el panel al cambiar de pestaña y dispara su animación CSS de entrada */}
+        <div key={t.id} id={`panel-${t.id}`} role="tabpanel" aria-labelledby={`tab-${t.id}`} className={styles.panel}>
             <div className={styles.copy}>
               <h3 className={styles.title}>{t.titulo}</h3>
               <p className={styles.text}>{t.texto}</p>
@@ -136,8 +145,7 @@ export function SystemSection() {
                 <t.Demo />
               </div>
             </div>
-          </motion.div>
-        </AnimatePresence>
+        </div>
       </div>
     </section>
   );

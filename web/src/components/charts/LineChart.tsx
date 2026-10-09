@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import styles from "./LineChart.module.css";
 
@@ -57,7 +56,6 @@ export function LineChart({
   const ref = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   const [hover, setHover] = useState<number | null>(null);
-  const reduce = useReducedMotion();
   const clipId = useId();
 
   useEffect(() => {
@@ -157,14 +155,13 @@ export function LineChart({
                   )}
                 </g>
               ) : (
-                <motion.path
+                // pathLength=1 permite dibujar la línea con stroke-dashoffset en CSS.
+                // La key cambia con drawKey para volver a dibujarla (ej: al cambiar de ejercicio).
+                <path
                   key={`${s.id}-${drawKey ?? ""}`}
                   d={pathFor(s.values)}
-                  className={s.tone === "silver" ? styles.lineSilver : styles.lineInk}
-                  initial={{ pathLength: reduce ? 1 : 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.1, ease: [0.77, 0, 0.175, 1] }}
+                  pathLength={1}
+                  className={`${s.tone === "silver" ? styles.lineSilver : styles.lineInk} ${styles.draw}`}
                 />
               ),
             )}

@@ -1,35 +1,50 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import styles from "./Reveal.module.css";
 
 /**
- * Entrada al scrollear: sube 16px y aparece. Bajo reduced-motion solo hace fade.
- * Expone data-inview para que animaciones CSS internas arranquen recién al verse.
+ * Entrada al scrollear: sube 16px y aparece. La animación es CSS pura; acá solo
+ * se detecta cuándo entra en pantalla. Expone data-inview para que animaciones
+ * CSS internas (como las del timeline) arranquen recién al verse.
  */
 export function Reveal({
   children,
   delay = 0,
   className,
-  as = "div",
+  as: Tag = "div",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
   as?: "div" | "li" | "section" | "article";
 }) {
-  const reduce = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
   const [seen, setSeen] = useState(false);
-  const Tag = motion[as];
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setSeen(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <Tag
-      className={className}
+      // @ts-expect-error: el ref sirve para cualquiera de los tags permitidos
+      ref={ref}
+      className={[styles.reveal, className].filter(Boolean).join(" ")}
       data-inview={seen}
-      initial={{ opacity: 0, transform: reduce ? "none" : "translateY(16px)" }}
-      whileInView={{ opacity: 1, transform: "translateY(0px)" }}
-      onViewportEnter={() => setSeen(true)}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: reduce ? 0.2 : 0.7, delay, ease: [0.23, 1, 0.32, 1] }}
+      style={{ "--reveal-delay": `${delay}s` } as CSSProperties}
     >
       {children}
     </Tag>
