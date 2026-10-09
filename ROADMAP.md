@@ -26,15 +26,15 @@ Todo se carga en `web/src/content/site.ts`.
 - [x] 💻 **Commit del proyecto `web/`**.
 - [x] 💻 **No subir los Excel al repo**: el de 6 días tiene datos de una alumna real. Quedan ignorados por el `.gitignore`.
 - [x] 💻 **Subir a GitHub** (`ffran44/athlos`, rama `main`).
-- [ ] 🧑‍🏫💻 **Decidir si el repo queda público o pasa a privado.** Hoy es público. Se cambia en GitHub → Settings → Danger Zone → Change visibility.
+- [ ] 🧑‍🏫💻 **Pasar el repo a privado.** Quedó a mitad de camino: GitHub pide verificar la identidad con un código por mail. Hay una pestaña abierta en Chrome en ese paso.
 - [ ] 💻 **Deploy en Vercel** (gratis), eligiendo la carpeta `web` como raíz del proyecto.
-- [ ] 🧑‍🏫💻 **Dominio propio**: ver disponibilidad (por ejemplo, `.com.ar` en NIC Argentina) y conectarlo en Vercel.
-- [ ] 💻 **Imagen para compartir** (Open Graph): cuando se pase el link por WhatsApp o Instagram, que aparezca el logo y el título.
-- [ ] 💻 **`sitemap.xml` y `robots.txt`** para Google.
-- [ ] 💻 **Datos estructurados** (LocalBusiness / Person) para que Google entienda quién es Manu y dónde entrena.
+- [ ] 🧑‍🏫💻 **Dominio propio**: ver disponibilidad (por ejemplo, `.com.ar` en NIC Argentina) y conectarlo en Vercel. Después definir `NEXT_PUBLIC_SITE_URL` en Vercel con ese dominio (lo usan el sitemap, el canonical y la imagen para compartir).
+- [x] 💻 **Imagen para compartir** (Open Graph): `web/src/app/opengraph-image.png`, con el logo, el título y la curva del Hack Squat.
+- [x] 💻 **`sitemap.xml` y `robots.txt`** para Google.
+- [x] 💻 **Datos estructurados** (Organization, Person y FAQPage). Falta sumar la dirección cuando se defina dónde es el presencial.
 - [ ] 💻 **Analytics** (Vercel Analytics o GA4) con eventos en los clics de WhatsApp e Instagram, para saber cuántas consultas trae la página.
 - [ ] 💻 **Probar en celulares reales** (iPhone con Safari, Android con Chrome): que WhatsApp abra la app con el mensaje ya escrito.
-- [ ] 💻 **Correr Lighthouse** (rendimiento, accesibilidad y SEO) sobre la versión publicada.
+- [ ] 💻 **Correr Lighthouse** sobre la versión publicada. En local (build de producción) dio: escritorio 99 / 100 / 100 / 100 y celular 84 / 100 / 100 / 100 (rendimiento, accesibilidad, buenas prácticas, SEO). Si en Vercel el rendimiento en celular sigue debajo de 90, revisar el peso del JavaScript de las animaciones.
 - [ ] 🧑‍🏫 **Poner el link en la bio de Instagram** (`athlos_training.mc`).
 - [ ] 🧑‍🏫 **Google Business Profile**, si el presencial tiene un lugar fijo.
 

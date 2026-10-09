@@ -28,10 +28,10 @@ export function Nav() {
   return (
     <header className={styles.header} data-open={open}>
       <div className={`wrap ${styles.bar}`}>
-        <a href="#top" className={styles.brand} aria-label="Athlos Training, inicio">
-          <Image src="/brand/athlos-mark.png" alt="" width={26} height={36} priority />
+        <a href="#top" className={styles.brand}>
+          <Image src="/brand/athlos-mark.png" alt="" width={26} height={37} priority />
           <span className={styles.word}>
-            Athlos<span>Training</span>
+            Athlos <span>Training</span>
           </span>
         </a>
 

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { GFS_Neohellenic, IBM_Plex_Mono, Noto_Serif } from "next/font/google";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 // Display: serif clásica, acompaña el wordmark del logo.
@@ -13,7 +14,6 @@ const neohellenic = GFS_Neohellenic({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "700"],
-  style: ["normal", "italic"],
 });
 
 // Números: el ADN de planilla del sistema.
@@ -24,6 +24,8 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  alternates: { canonical: "/" },
   title: "Athlos Training | Entrenamiento con método",
   description:
     "Coaching online y presencial con Manu. Planes de 8 semanas con registro de cargas, medidas corporales y hábitos, revisados cada semana.",
@@ -32,7 +34,9 @@ export const metadata: Metadata = {
     description: "Coaching online y presencial con Manu: entrenamiento, medidas corporales y hábitos en un mismo sistema.",
     locale: "es_AR",
     type: "website",
+    siteName: "Athlos Training",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {

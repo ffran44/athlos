@@ -11,10 +11,6 @@
   min-height: min(calc(100dvh - var(--nav-h) - 110px), 640px);
 }
 
-.copy {
-  animation: enter 900ms var(--ease-out) both;
-}
-
 .eyebrow {
   display: inline-flex;
   align-items: center;
