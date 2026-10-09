@@ -1,6 +1,6 @@
 # Roadmap Athlos Training
 
-Estado al 8/10/2026. La landing está en `web/`, subida a `main` en GitHub (`ffran44/athlos`), con el WhatsApp y el Instagram reales. Usa Noto Serif en los títulos y GFS Neohellenic en el texto. Falta publicarla.
+Estado al 9/10/2026. La landing está **publicada en https://athlos-training.vercel.app** (Vercel publica solo cada push a `main` de `ffran44/athlos`). Tiene el WhatsApp y el Instagram reales, Noto Serif en los títulos y GFS Neohellenic en el texto. Lo que falta para lanzarla es el contenido de Manu (sección 1).
 Marcá cada ítem con `[x]` a medida que se resuelva.
 
 **Responsable:** 🧑‍🏫 Manu · 💻 vos (desarrollo)
@@ -27,15 +27,17 @@ Todo se carga en `web/src/content/site.ts`.
 - [x] 💻 **No subir los Excel al repo**: el de 6 días tiene datos de una alumna real. Quedan ignorados por el `.gitignore`.
 - [x] 💻 **Subir a GitHub** (`ffran44/athlos`, rama `main`).
 - [ ] 🧑‍🏫💻 **Pasar el repo a privado.** Quedó a mitad de camino: GitHub pide verificar la identidad con un código por mail. Hay una pestaña abierta en Chrome en ese paso.
-- [ ] 💻 **Deploy en Vercel** (gratis), eligiendo la carpeta `web` como raíz del proyecto.
+- [x] 💻 **Deploy en Vercel**: proyecto `athlos-training`, carpeta raíz `web`, publicado en https://athlos-training.vercel.app.
+- [ ] 💻 **Activar el 2FA en la cuenta de Vercel.** Se salteó el aviso al hacer el deploy.
 - [ ] 🧑‍🏫💻 **Dominio propio**: ver disponibilidad (por ejemplo, `.com.ar` en NIC Argentina) y conectarlo en Vercel. Después definir `NEXT_PUBLIC_SITE_URL` en Vercel con ese dominio (lo usan el sitemap, el canonical y la imagen para compartir).
 - [x] 💻 **Imagen para compartir** (Open Graph): `web/src/app/opengraph-image.png`, con el logo, el título y la curva del Hack Squat.
 - [x] 💻 **`sitemap.xml` y `robots.txt`** para Google.
 - [x] 💻 **Datos estructurados** (Organization, Person y FAQPage). Falta sumar la dirección cuando se defina dónde es el presencial.
 - [ ] 💻 **Analytics** (Vercel Analytics o GA4) con eventos en los clics de WhatsApp e Instagram, para saber cuántas consultas trae la página.
 - [ ] 💻 **Probar en celulares reales** (iPhone con Safari, Android con Chrome): que WhatsApp abra la app con el mensaje ya escrito.
-- [ ] 💻 **Correr Lighthouse** sobre la versión publicada. En local (build de producción) dio: escritorio 99 / 100 / 100 / 100 y celular 84 / 100 / 100 / 100 (rendimiento, accesibilidad, buenas prácticas, SEO). Si en Vercel el rendimiento en celular sigue debajo de 90, revisar el peso del JavaScript de las animaciones.
-- [ ] 🧑‍🏫 **Poner el link en la bio de Instagram** (`athlos_training.mc`).
+- [x] 💻 **Correr Lighthouse sobre la versión publicada** (9/10/2026). Rendimiento / accesibilidad / buenas prácticas / SEO: escritorio 100 / 100 / 100 / 100 y celular 88 / 100 / 100 / 100 (LCP 3,1 s, sin saltos de layout).
+- [ ] 💻 **Subir el rendimiento en celular a 90 o más**: el LCP de 3,1 s viene sobre todo del JavaScript de las animaciones (librería Motion). Opción: pasar las entradas al scroll a CSS puro.
+- [ ] 🧑‍🏫 **Poner el link en la bio de Instagram** (`athlos_training.mc`): https://athlos-training.vercel.app. Conviene esperar a tener la bio, la foto y los testimonios reales.
 - [ ] 🧑‍🏫 **Google Business Profile**, si el presencial tiene un lugar fijo.
 
 ## 3. Arreglos en las planillas (encontrados al analizarlas)
