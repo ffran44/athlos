@@ -1,33 +1,48 @@
+/* ---------- Acordeón de planes ---------- */
+
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  grid-template-rows: auto auto;
-  gap: 16px;
+  grid-template-columns: var(--cols, 2.3fr 1fr 1fr);
+  gap: 14px;
   margin-top: clamp(36px, 5vw, 60px);
+  transition: grid-template-columns 650ms var(--ease-drawer);
 }
 
 .plan {
+  /* Colores de la tarjeta cerrada; la abierta los redefine */
+  --fg: var(--ink);
+  --soft: var(--ink-2);
+  --faint: var(--muted);
+
+  position: relative;
   display: flex;
   flex-direction: column;
-  padding: clamp(22px, 3vw, 32px);
+  min-width: 0;
+  padding: clamp(22px, 2.6vw, 32px);
   border-radius: var(--r-lg);
   background: var(--surface);
+  color: var(--fg);
+  overflow: hidden;
   box-shadow:
     inset 0 0 0 1px rgb(11 21 38 / 0.07),
     0 18px 40px -30px rgb(11 21 38 / 0.35);
+  transition:
+    background-color 450ms ease,
+    color 450ms ease,
+    box-shadow 450ms ease,
+    transform 300ms var(--ease-out);
 }
 
-.featured {
-  grid-row: span 2;
+.plan[data-open="true"] {
+  --fg: #eef1f5;
+  --soft: #c8cfd9;
+  --faint: #aab3c0;
   background: var(--ink);
-  color: #eef1f5;
   box-shadow: 0 30px 60px -36px rgb(11 21 38 / 0.7);
-  position: relative;
-  overflow: hidden;
 }
 
-/* El casco del logo, grabado en la placa del plan completo */
-.featured::after {
+/* El casco del logo, grabado en la placa del plan abierto */
+.plan::after {
   content: "";
   position: absolute;
   right: -40px;
@@ -35,54 +50,183 @@
   width: 280px;
   height: 390px;
   background: url("/brand/athlos-mark.png") no-repeat center / contain;
-  opacity: 0.07;
   filter: invert(1);
+  opacity: 0;
   pointer-events: none;
+  transition: opacity 600ms ease;
 }
 
-.head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  column-gap: 14px;
+.plan[data-open="true"]::after {
+  opacity: 0.07;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .plan:not([data-open="true"]):hover {
+    transform: translateY(-3px);
+    box-shadow:
+      inset 0 0 0 1px rgb(11 21 38 / 0.12),
+      0 24px 44px -28px rgb(11 21 38 / 0.4);
+  }
+}
+
+/* ---------- Encabezado (botón que abre el plan) ---------- */
+
+.heading {
+  margin: 0;
+  font: inherit;
+}
+
+.toggle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: 12px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Cerrada, toda la tarjeta es clickeable */
+.plan:not([data-open="true"]) .toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.toggle:focus-visible {
+  outline: none;
+}
+
+.plan:has(.toggle:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 
 .mode {
-  width: 100%;
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--faint);
+  transition: color 450ms ease;
 }
 
-.featured .mode {
-  color: #aab3c0;
+.nameRow {
+  grid-column: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  margin-top: 4px;
 }
 
 .name {
-  margin-top: 4px;
   font-family: var(--font-display), serif;
   font-size: clamp(1.7rem, 2.6vw, 2.2rem);
   font-weight: 600;
   letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
 .tag {
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.1);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16);
+  white-space: nowrap;
+  box-shadow: inset 0 0 0 1px currentColor;
+  opacity: 0.85;
+}
+
+.plus {
+  grid-column: 2;
+  margin-top: -26px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px currentColor;
+  opacity: 0.55;
+  transition:
+    transform 450ms var(--ease-drawer),
+    opacity 300ms ease;
+}
+
+.plan[data-open="true"] .plus {
+  transform: rotate(45deg);
+  opacity: 0.35;
 }
 
 .summary {
   margin-top: 12px;
   max-width: 46ch;
-  color: var(--ink-2);
+  color: var(--soft);
+  transition: color 450ms ease;
 }
 
-.featured .summary {
-  color: #c8cfd9;
+.plan[data-open="true"] .summary {
   font-size: 1.05rem;
+}
+
+/* "Ver qué incluye": solo en las cerradas */
+.peek {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--fg);
+  transition: gap 250ms var(--ease-out);
+}
+
+.plan:not([data-open="true"]):hover .peek {
+  gap: 10px;
+}
+
+.plan[data-open="true"] .peek {
+  display: none;
+}
+
+/* ---------- Detalle desplegable ---------- */
+
+.details {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 600ms var(--ease-drawer),
+    opacity 200ms ease;
+}
+
+.plan[data-open="true"] .details {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  flex: 1;
+  transition:
+    grid-template-rows 600ms var(--ease-drawer),
+    opacity 400ms ease 150ms;
+}
+
+.detailsInner {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+/* En escritorio el contenido tiene ancho fijo: no se reacomoda mientras la columna crece */
+@media (min-width: 861px) {
+  .detailsInner {
+    min-width: 440px;
+  }
 }
 
 .list {
@@ -91,7 +235,7 @@
   padding: 0;
   display: grid;
   gap: 10px;
-  font-size: 0.93rem;
+  font-size: 0.95rem;
 }
 
 .list li {
@@ -110,11 +254,8 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
-  margin: auto 0 0;
+  margin: 28px 0 0;
   padding: 0;
-  padding-top: 32px;
-  position: relative;
-  z-index: 1;
 }
 
 .systems li {
@@ -140,13 +281,13 @@
 }
 
 .sysName {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
 }
 
 .sysDetail {
   font-size: 0.8rem;
-  color: #aab3c0;
+  color: var(--faint);
 }
 
 .foot {
@@ -156,19 +297,13 @@
   justify-content: space-between;
   gap: 14px;
   margin-top: auto;
-  padding-top: 26px;
-  position: relative;
-  z-index: 1;
+  padding-top: 28px;
 }
 
 .price {
   font-size: 0.85rem;
   font-weight: 500;
-  color: var(--muted);
-}
-
-.featured .price {
-  color: #aab3c0;
+  color: var(--faint);
 }
 
 /* Botón claro sobre la placa oscura */
@@ -181,12 +316,16 @@
   background: rgb(11 21 38 / 0.08) !important;
 }
 
+/* ---------- Celular: acordeón vertical ---------- */
+
 @media (max-width: 860px) {
   .grid {
     grid-template-columns: minmax(0, 1fr);
+    transition: none;
   }
-  .featured {
-    grid-row: auto;
+  .peek {
+    margin-top: 16px;
+    padding-top: 0;
   }
   .systems {
     grid-template-columns: minmax(0, 1fr);
@@ -202,9 +341,4 @@
   .systems li:last-child {
     border-radius: 0 0 var(--r-md) var(--r-md);
   }
-}
-
-/* En la tarjeta destacada el espacio libre lo toma la franja de sistemas */
-.systems + .foot {
-  margin-top: 0;
 }
