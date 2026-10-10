@@ -10,6 +10,7 @@
 }
 
 .item {
+  overflow: hidden;
   border-bottom: 1px solid var(--line);
 }
 
@@ -19,40 +20,68 @@
   align-items: center;
   gap: 20px;
   padding: 20px 0;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.05rem;
   cursor: pointer;
   list-style: none;
+  transition: color 200ms ease;
 }
 
 .item summary::-webkit-details-marker {
   display: none;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .item:not([open]) summary:hover {
+    color: var(--ink-2);
+  }
+}
+
+/* El + se vuelve × al abrir y vuelve al cerrar (también mientras se pliega) */
 .icon {
+  display: grid;
+  place-items: center;
   flex-shrink: 0;
-  transition: transform 220ms var(--ease-out);
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition:
+    transform 420ms var(--ease-drawer),
+    background-color 300ms ease,
+    color 300ms ease,
+    box-shadow 300ms ease;
 }
 
-.item[open] .icon {
-  transform: rotate(45deg);
+.item[open]:not([data-cerrando]) .icon {
+  transform: rotate(135deg);
+  background: var(--ink);
+  color: #f3f5f8;
+  box-shadow: none;
 }
 
-.item p {
-  padding-bottom: 22px;
-  max-width: 60ch;
+.answer {
+  position: relative;
+  padding: 0 0 24px 18px;
+  max-width: 62ch;
   color: var(--ink-2);
 }
 
-.item[open] p {
-  animation: open 260ms var(--ease-out);
+/* Filete a la izquierda de la respuesta (lo anima anime.js) */
+.filete {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 28px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--ink);
+  transform-origin: top;
 }
 
-@keyframes open {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
+/* inline-block para poder moverlas; los espacios quedan afuera, así el texto corta bien */
+.word {
+  display: inline-block;
 }
 
 @media (max-width: 860px) {
