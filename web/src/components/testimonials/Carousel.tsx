@@ -32,7 +32,7 @@ export default function Carousel({ onReady, onMove }: { onReady: (s: SwiperType)
       onResize={onMove}
     >
       {testimonios.map((t, i) => (
-        <SwiperSlide key={i} className={styles.slide}>
+        <SwiperSlide key={i} className={`columna ${styles.slide}`}>
           <TestimonialCard t={t} />
         </SwiperSlide>
       ))}

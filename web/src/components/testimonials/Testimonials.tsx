@@ -19,7 +19,7 @@ function FilaEstatica() {
   return (
     <div className={`${styles.swiper} ${styles.static}`}>
       {testimonios.map((t, i) => (
-        <div key={i} className={styles.slide}>
+        <div key={i} className={`columna ${styles.slide}`}>
           <TestimonialCard t={t} />
         </div>
       ))}

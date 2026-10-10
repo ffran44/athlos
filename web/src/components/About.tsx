@@ -7,17 +7,24 @@ export function About() {
   return (
     <section id="manu" className="section">
       <div className={`wrap ${styles.grid}`}>
-        <Reveal className={styles.photo}>
-          {bio.foto ? (
-            <Image src={bio.foto} alt={`${bio.nombre}, entrenador de Athlos Training`} fill sizes="(max-width: 860px) 100vw, 40vw" />
-          ) : (
-            // TODO: reemplazar por la foto real (ver `bio.foto` en src/content/site.ts)
-            <div className={styles.placeholder}>
-              <Image src="/brand/athlos-mark.png" alt="" width={120} height={168} />
-              <span>Foto de Manu</span>
-            </div>
-          )}
-        </Reveal>
+        <div className={`columna ${styles.photoWrap}`}>
+          <Reveal className={styles.photo}>
+            {bio.foto ? (
+              <Image
+                src={bio.foto}
+                alt={`${bio.nombre}, entrenador de Athlos Training`}
+                fill
+                sizes="(max-width: 860px) 100vw, 40vw"
+              />
+            ) : (
+              // TODO: reemplazar por la foto real (ver `bio.foto` en src/content/site.ts)
+              <div className={styles.placeholder}>
+                <Image src="/brand/athlos-mark.png" alt="" width={120} height={168} />
+                <span>Foto de Manu</span>
+              </div>
+            )}
+          </Reveal>
+        </div>
 
         <Reveal delay={0.1} className={styles.copy}>
           <h2 className="sectionTitle">{bio.titular}</h2>

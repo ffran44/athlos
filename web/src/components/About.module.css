@@ -57,7 +57,7 @@
   .grid {
     grid-template-columns: minmax(0, 1fr);
   }
-  .photo {
+  .photoWrap {
     max-width: 420px;
   }
 }

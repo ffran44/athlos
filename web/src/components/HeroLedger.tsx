@@ -193,7 +193,7 @@ export function HeroLedger() {
       <div ref={flipRef} className={styles.flipper}>
         <figure
           ref={figRef}
-          className={`${bezel.shell} ${styles.fig}`}
+          className={`columna ${bezel.shell} ${styles.fig}`}
           data-anim="pending"
           data-actual={actual}
           data-rm-desde={registradas[0]}

@@ -230,11 +230,13 @@ export function SystemSection() {
               ))}
             </ul>
           </div>
-          <div ref={shellRef} className={`${bezel.shell} ${styles.shell}`}>
-            <div className={`${bezel.core} ${styles.demoCore}`}>
-              {/* La key remonta la demo al cambiar de pestaña */}
-              <div ref={demoRef} key={`demo-${t.id}`} className={styles.demoSlot}>
-                <t.Demo />
+          <div className="columna">
+            <div ref={shellRef} className={`${bezel.shell} ${styles.shell}`}>
+              <div className={`${bezel.core} ${styles.demoCore}`}>
+                {/* La key remonta la demo al cambiar de pestaña */}
+                <div ref={demoRef} key={`demo-${t.id}`} className={styles.demoSlot}>
+                  <t.Demo />
+                </div>
               </div>
             </div>
           </div>

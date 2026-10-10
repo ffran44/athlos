@@ -166,3 +166,58 @@ button {
     animation-duration: 0.01ms !important;
   }
 }
+
+/*
+ * Columna: capitel arriba y basa abajo, como el perfil de una columna griega
+ * pero reducido a dos filetes finos. El de afuera (ábaco / plinto) sobresale
+ * --col-vuelo a cada lado; el de adentro sobresale --col-filete.
+ * Se aplica a un contenedor que NO recorte su contenido (sin overflow hidden).
+ */
+.columna {
+  --col-vuelo: 10px;
+  --col-filete: 4px;
+  --col-color: rgb(11 21 38 / 0.42);
+  position: relative;
+}
+
+.columna::before,
+.columna::after {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--col-vuelo));
+  right: calc(-1 * var(--col-vuelo));
+  height: 6px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--col-color), var(--col-color)) no-repeat,
+    linear-gradient(var(--col-color), var(--col-color)) no-repeat;
+}
+
+/* Capitel: ábaco ancho arriba, filete más corto debajo */
+.columna::before {
+  top: -12px;
+  background-size:
+    100% 2px,
+    calc(100% - 2 * var(--col-vuelo) + 2 * var(--col-filete)) 1px;
+  background-position:
+    0 0,
+    50% 5px;
+}
+
+/* Basa: en espejo, el plinto ancho queda abajo */
+.columna::after {
+  bottom: -12px;
+  background-size:
+    calc(100% - 2 * var(--col-vuelo) + 2 * var(--col-filete)) 1px,
+    100% 2px;
+  background-position:
+    50% 0,
+    0 4px;
+}
+
+@media (max-width: 560px) {
+  .columna {
+    --col-vuelo: 6px;
+    --col-filete: 3px;
+  }
+}

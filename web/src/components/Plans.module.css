@@ -8,6 +8,17 @@
   transition: grid-template-columns 650ms var(--ease-drawer);
 }
 
+.col {
+  --col-vuelo: 4px !important;
+  --col-filete: 1px !important;
+  display: flex;
+  min-width: 0;
+}
+
+.col > .plan {
+  flex: 1;
+}
+
 .plan {
   /* Colores de la tarjeta cerrada; la abierta los redefine */
   --fg: var(--ink);
@@ -62,7 +73,6 @@
 
 @media (hover: hover) and (pointer: fine) {
   .plan:not([data-open="true"]):hover {
-    transform: translateY(-3px);
     box-shadow:
       inset 0 0 0 1px rgb(11 21 38 / 0.12),
       0 24px 44px -28px rgb(11 21 38 / 0.4);
