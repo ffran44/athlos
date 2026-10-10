@@ -1,5 +1,7 @@
 "use client";
 
+import { animate, type JSAnimation } from "animejs/animation";
+import { set, stagger } from "animejs/utils";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Reveal } from "../ui/Reveal";
 import bezel from "../ui/Bezel.module.css";
@@ -57,12 +59,21 @@ const tabs = [
 ] as const;
 
 export function SystemSection() {
+  // `active` mueve la píldora al instante; `mostrado` es la demo que se ve, y
+  // cambia recién cuando terminó de salir la anterior.
   const [active, setActive] = useState(0);
+  const [mostrado, setMostrado] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const listRef = useRef<HTMLDivElement>(null);
+  const shellRef = useRef<HTMLDivElement>(null);
+  const demoRef = useRef<HTMLDivElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
+  const transicion = useRef<{ dir: number; alto: number } | null>(null);
+  const enCurso = useRef<JSAnimation[]>([]);
+  const espera = useRef<number | undefined>(undefined);
   // Posición de la píldora que marca la pestaña activa (se mueve con una transición CSS)
   const [pill, setPill] = useState<{ x: number; w: number } | null>(null);
-  const t = tabs[active];
+  const t = tabs[mostrado];
 
   useLayoutEffect(() => {
     const list = listRef.current;
@@ -77,11 +88,91 @@ export function SystemSection() {
     return () => ro.disconnect();
   }, [active]);
 
+  const cortar = () => {
+    enCurso.current.forEach((a) => a.pause());
+    enCurso.current = [];
+  };
+
+  // Partes de la demo y del texto que entran escalonadas
+  const partes = () => [...(demoRef.current?.firstElementChild?.children ?? [])] as HTMLElement[];
+  const textos = () => [...(copyRef.current?.children ?? [])] as HTMLElement[];
+
+  function cambiar(i: number) {
+    if (i === active) return;
+    const dir = i > active ? 1 : -1;
+    setActive(i);
+    const shell = shellRef.current;
+    if (!shell || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      window.clearTimeout(espera.current);
+      setMostrado(i);
+      return;
+    }
+    cortar();
+    window.clearTimeout(espera.current);
+    transicion.current = { dir, alto: shell.offsetHeight };
+    // Sale la demo actual hacia el lado contrario a la pestaña elegida
+    enCurso.current.push(
+      animate(partes(), {
+        opacity: 0,
+        x: -28 * dir,
+        filter: "blur(4px)",
+        duration: 200,
+        ease: "inQuad",
+        delay: stagger(18),
+      }),
+      animate(textos(), { opacity: 0, y: -6, duration: 180, ease: "inQuad" }),
+    );
+    espera.current = window.setTimeout(() => setMostrado(i), 230);
+  }
+
+  // Entra la demo nueva: el marco cambia de alto y las partes llegan escalonadas
+  useLayoutEffect(() => {
+    const tr = transicion.current;
+    const shell = shellRef.current;
+    if (!tr || !shell) return;
+    transicion.current = null;
+    cortar();
+
+    shell.style.height = "";
+    const alto = shell.offsetHeight;
+    shell.dataset.cambiando = "";
+    set(shell, { height: tr.alto });
+    set(partes(), { opacity: 0, x: 36 * tr.dir, filter: "blur(4px)" });
+    set(textos(), { opacity: 0, y: 10 });
+
+    enCurso.current.push(
+      animate(shell, {
+        height: alto,
+        duration: 620,
+        ease: "outExpo",
+        onComplete: () => {
+          shell.style.height = "";
+          delete shell.dataset.cambiando;
+        },
+      }),
+      animate(partes(), {
+        opacity: 1,
+        x: 0,
+        filter: "blur(0px)",
+        duration: 620,
+        ease: "outExpo",
+        delay: stagger(55, { start: 60 }),
+      }),
+      animate(textos(), {
+        opacity: 1,
+        y: 0,
+        duration: 560,
+        ease: "outExpo",
+        delay: stagger(60, { start: 40 }),
+      }),
+    );
+  }, [mostrado]);
+
   function onKey(e: React.KeyboardEvent) {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
     e.preventDefault();
     const next = (active + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
-    setActive(next);
+    cambiar(next);
     tabRefs.current[next]?.focus();
   }
 
@@ -119,32 +210,34 @@ export function SystemSection() {
               role="tab"
               id={`tab-${x.id}`}
               aria-selected={i === active}
-              aria-controls={`panel-${x.id}`}
+              aria-controls="panel-sistema"
               tabIndex={i === active ? 0 : -1}
               className={styles.tab}
-              onClick={() => setActive(i)}
+              onClick={() => cambiar(i)}
             >
               <span className={styles.tabLabel}>{x.tab}</span>
             </button>
           ))}
         </div>
 
-        {/* La key remonta el panel al cambiar de pestaña y dispara su animación CSS de entrada */}
-        <div key={t.id} id={`panel-${t.id}`} role="tabpanel" aria-labelledby={`tab-${t.id}`} className={styles.panel}>
-            <div className={styles.copy}>
-              <h3 className={styles.title}>{t.titulo}</h3>
-              <p className={styles.text}>{t.texto}</p>
-              <ul className={styles.items}>
-                {t.items.map((it) => (
-                  <li key={it}>{it}</li>
-                ))}
-              </ul>
-            </div>
-            <div className={bezel.shell}>
-              <div className={`${bezel.core} ${styles.demoCore}`}>
+        <div id="panel-sistema" role="tabpanel" aria-labelledby={`tab-${t.id}`} className={styles.panel}>
+          <div ref={copyRef} key={`copy-${t.id}`} className={styles.copy}>
+            <h3 className={styles.title}>{t.titulo}</h3>
+            <p className={styles.text}>{t.texto}</p>
+            <ul className={styles.items}>
+              {t.items.map((it) => (
+                <li key={it}>{it}</li>
+              ))}
+            </ul>
+          </div>
+          <div ref={shellRef} className={`${bezel.shell} ${styles.shell}`}>
+            <div className={`${bezel.core} ${styles.demoCore}`}>
+              {/* La key remonta la demo al cambiar de pestaña */}
+              <div ref={demoRef} key={`demo-${t.id}`} className={styles.demoSlot}>
                 <t.Demo />
               </div>
             </div>
+          </div>
         </div>
       </div>
     </section>

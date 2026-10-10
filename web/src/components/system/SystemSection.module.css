@@ -70,15 +70,15 @@
   gap: clamp(28px, 5vw, 72px);
   align-items: start;
   margin-top: clamp(28px, 4vw, 44px);
-  animation: panel-in 280ms var(--ease-out);
 }
 
-@keyframes panel-in {
-  from {
-    opacity: 0;
-    filter: blur(2px);
-    transform: translateY(8px);
-  }
+/* Mientras cambia de alto entre demos, el marco recorta su contenido (lo activa el JS) */
+.shell[data-cambiando] {
+  overflow: hidden;
+}
+
+.demoSlot {
+  display: block;
 }
 
 .copy {
