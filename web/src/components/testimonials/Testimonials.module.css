@@ -56,8 +56,6 @@
 }
 
 .slide {
-  --col-vuelo: 4px !important;
-  --col-filete: 1px !important;
   width: min(440px, 84vw) !important;
   height: auto !important;
   transition:

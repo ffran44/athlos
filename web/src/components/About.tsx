@@ -7,8 +7,8 @@ export function About() {
   return (
     <section id="manu" className="section">
       <div className={`wrap ${styles.grid}`}>
-        <div className={`columna ${styles.photoWrap}`}>
-          <Reveal className={styles.photo}>
+        <div className={`columna-borde ${styles.photoWrap}`}>
+          <Reveal className={`columna-cuerpo ${styles.photo}`}>
             {bio.foto ? (
               <Image
                 src={bio.foto}

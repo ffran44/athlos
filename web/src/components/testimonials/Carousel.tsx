@@ -12,7 +12,7 @@ import styles from "./Testimonials.module.css";
 export default function Carousel({ onReady, onMove }: { onReady: (s: SwiperType) => void; onMove: (s: SwiperType) => void }) {
   return (
     <Swiper
-      className={styles.swiper}
+      className={`columna ${styles.swiper}`}
       modules={[Keyboard, A11y]}
       slidesPerView="auto"
       spaceBetween={16}
@@ -32,7 +32,7 @@ export default function Carousel({ onReady, onMove }: { onReady: (s: SwiperType)
       onResize={onMove}
     >
       {testimonios.map((t, i) => (
-        <SwiperSlide key={i} className={`columna ${styles.slide}`}>
+        <SwiperSlide key={i} className={`columna-borde ${styles.slide}`}>
           <TestimonialCard t={t} />
         </SwiperSlide>
       ))}

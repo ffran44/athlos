@@ -168,56 +168,58 @@ button {
 }
 
 /*
- * Columna: capitel arriba y basa abajo, como el perfil de una columna griega
- * pero reducido a dos filetes finos. El de afuera (ábaco / plinto) sobresale
- * --col-vuelo a cada lado; el de adentro sobresale --col-filete.
- * Se aplica a un contenedor que NO recorte su contenido (sin overflow hidden).
+ * Silueta de columna griega para los paneles: el contorno tiene capitel arriba
+ * (losa ancha + banda), fuste en el medio y basa abajo, con esquinas cuadradas.
+ *
+ *   .columna-borde  dibuja la línea del contorno (fondo del color de la línea + 1px de padding)
+ *   .columna-cuerpo va adentro y es el panel en sí; su silueta está 1px más adentro
+ *   .columna        (opcional, en un contenedor) agrega la sombra que sigue la forma
+ *
+ * --c1: alto de la losa, --c2: hasta dónde llega la banda, --s1/--s2: retiro de banda y fuste.
  */
-.columna {
-  --col-vuelo: 10px;
-  --col-filete: 4px;
-  --col-color: rgb(11 21 38 / 0.42);
-  position: relative;
-}
-
-.columna::before,
-.columna::after {
-  content: "";
-  position: absolute;
-  left: calc(-1 * var(--col-vuelo));
-  right: calc(-1 * var(--col-vuelo));
-  height: 6px;
-  pointer-events: none;
-  background:
-    linear-gradient(var(--col-color), var(--col-color)) no-repeat,
-    linear-gradient(var(--col-color), var(--col-color)) no-repeat;
-}
-
-/* Capitel: ábaco ancho arriba, filete más corto debajo */
-.columna::before {
-  top: -12px;
-  background-size:
-    100% 2px,
-    calc(100% - 2 * var(--col-vuelo) + 2 * var(--col-filete)) 1px;
-  background-position:
+.columna-borde,
+.columna-cuerpo {
+  --s1: 4px;
+  --s2: 10px;
+  clip-path: polygon(
     0 0,
-    50% 5px;
+    100% 0,
+    100% var(--c1),
+    calc(100% - var(--s1)) var(--c1),
+    calc(100% - var(--s1)) var(--c2),
+    calc(100% - var(--s2)) var(--c2),
+    calc(100% - var(--s2)) calc(100% - var(--c2)),
+    calc(100% - var(--s1)) calc(100% - var(--c2)),
+    calc(100% - var(--s1)) calc(100% - var(--c1)),
+    100% calc(100% - var(--c1)),
+    100% 100%,
+    0 100%,
+    0 calc(100% - var(--c1)),
+    var(--s1) calc(100% - var(--c1)),
+    var(--s1) calc(100% - var(--c2)),
+    var(--s2) calc(100% - var(--c2)),
+    var(--s2) var(--c2),
+    var(--s1) var(--c2),
+    var(--s1) var(--c1),
+    0 var(--c1)
+  );
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
-/* Basa: en espejo, el plinto ancho queda abajo */
-.columna::after {
-  bottom: -12px;
-  background-size:
-    calc(100% - 2 * var(--col-vuelo) + 2 * var(--col-filete)) 1px,
-    100% 2px;
-  background-position:
-    50% 0,
-    0 4px;
+.columna-borde {
+  --c1: 8px;
+  --c2: 14px;
+  padding: 1px !important;
+  background: rgb(11 21 38 / 0.22) !important;
 }
 
-@media (max-width: 560px) {
-  .columna {
-    --col-vuelo: 6px;
-    --col-filete: 3px;
-  }
+/* El cuerpo queda 1px más adentro en cada tramo: misma forma, perfil 2px más bajo */
+.columna-cuerpo {
+  --c1: 6px;
+  --c2: 12px;
+}
+
+.columna {
+  filter: drop-shadow(0 22px 26px rgb(11 21 38 / 0.11));
 }

@@ -231,8 +231,8 @@ export function SystemSection() {
             </ul>
           </div>
           <div className="columna">
-            <div ref={shellRef} className={`${bezel.shell} ${styles.shell}`}>
-              <div className={`${bezel.core} ${styles.demoCore}`}>
+            <div ref={shellRef} className={`columna-borde ${styles.shell}`}>
+              <div className={`${bezel.core} columna-cuerpo ${styles.demoCore}`}>
                 {/* La key remonta la demo al cambiar de pestaña */}
                 <div ref={demoRef} key={`demo-${t.id}`} className={styles.demoSlot}>
                   <t.Demo />

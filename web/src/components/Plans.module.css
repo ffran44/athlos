@@ -9,8 +9,6 @@
 }
 
 .col {
-  --col-vuelo: 4px !important;
-  --col-filete: 1px !important;
   display: flex;
   min-width: 0;
 }
@@ -113,9 +111,10 @@
   outline: none;
 }
 
-.plan:has(.toggle:focus-visible) {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
+/* El clip-path recortaría un outline: el foco se marca pintando el contorno de la columna */
+.col:has(.toggle:focus-visible) {
+  background: var(--ink) !important;
+  padding: 2px !important;
 }
 
 .mode {

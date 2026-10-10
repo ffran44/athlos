@@ -1,6 +1,5 @@
 .fig {
   margin: 0;
-  transform: rotate(0.6deg);
 }
 
 .card {
@@ -140,11 +139,6 @@
   color: var(--good);
 }
 
-@media (max-width: 900px) {
-  .fig {
-    transform: none;
-  }
-}
 
 /* ---------- Giro de la ficha y selector de ejercicio ---------- */
 

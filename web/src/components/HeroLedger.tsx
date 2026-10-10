@@ -190,17 +190,17 @@ export function HeroLedger() {
 
   return (
     <div className={styles.stage}>
-      <div ref={flipRef} className={styles.flipper}>
+      <div ref={flipRef} className={`columna ${styles.flipper}`}>
         <figure
           ref={figRef}
-          className={`columna ${bezel.shell} ${styles.fig}`}
+          className={`columna-borde ${styles.fig}`}
           data-anim="pending"
           data-actual={actual}
           data-rm-desde={registradas[0]}
           data-rm-hasta={registradas[actual]}
           data-mejora={mejora}
         >
-          <div className={`${bezel.core} ${styles.card}`}>
+          <div className={`${bezel.core} columna-cuerpo ${styles.card}`}>
             <header className={styles.head}>
               <div>
                 <p className={styles.kicker}>

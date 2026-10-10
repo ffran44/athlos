@@ -11,7 +11,7 @@ const iniciales = (nombre: string) =>
 
 export function TestimonialCard({ t }: { t: Testimonio }) {
   return (
-    <figure className={styles.card}>
+    <figure className={`columna-cuerpo ${styles.card}`}>
       <span className={styles.mark} aria-hidden="true">
         “
       </span>

@@ -75,14 +75,14 @@ export function Plans() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div ref={gridRef} className={styles.grid} style={{ "--cols": columnas } as CSSProperties}>
+          <div ref={gridRef} className={`columna ${styles.grid}`} style={{ "--cols": columnas } as CSSProperties}>
             {planes.map((p, i) => {
               const abierto = i === activo;
               const panelId = `plan-${p.id}`;
               return (
-                // Cada plan es una columna: el capitel y la basa van en el contenedor
-                <div key={p.id} className={`columna ${styles.col}`}>
-                  <article className={styles.plan} data-open={abierto} data-plan={i}>
+                // Cada plan es una columna: el contenedor dibuja el contorno y el plan es el cuerpo
+                <div key={p.id} className={`columna-borde ${styles.col}`}>
+                  <article className={`columna-cuerpo ${styles.plan}`} data-open={abierto} data-plan={i}>
                     <p className={styles.mode}>{p.modalidad}</p>
                     <h3 className={styles.heading}>
                       <button

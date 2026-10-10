@@ -17,9 +17,9 @@ import styles from "./Testimonials.module.css";
  */
 function FilaEstatica() {
   return (
-    <div className={`${styles.swiper} ${styles.static}`}>
+    <div className={`columna ${styles.swiper} ${styles.static}`}>
       {testimonios.map((t, i) => (
-        <div key={i} className={`columna ${styles.slide}`}>
+        <div key={i} className={`columna-borde ${styles.slide}`}>
           <TestimonialCard t={t} />
         </div>
       ))}
